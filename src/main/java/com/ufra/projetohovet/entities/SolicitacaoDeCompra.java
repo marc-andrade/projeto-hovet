@@ -1,6 +1,5 @@
 package com.ufra.projetohovet.entities;
 
-import com.ufra.projetohovet.enums.TipoInsumo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,20 +13,14 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_insumo")
-public class Insumo {
+@Table(name = "tb_solicitacao_de_compra")
+public class SolicitacaoDeCompra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
-    private TipoInsumo tipo;
-    private String nome;
-    private Integer unidade;
-    @ManyToOne
-    private Categoria Categoria;
-    @OneToMany(mappedBy = "insumo")
-    private List<Estoque> estoques;
-
-
+    private String status;
+    @OneToMany(mappedBy = "solicitacao_de_compra_id")
+    private List<ItemSolicitado> itemsSolicitados;
 }
