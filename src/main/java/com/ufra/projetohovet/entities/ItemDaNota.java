@@ -12,14 +12,13 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_solicitacao_de_compra")
+@Table(name = "tb_item_da_nota")
 public class ItemDaNota {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
-
     @ManyToOne
     @JoinColumn(name = "nota_fiscal_id")
     private NotaFiscal notaFiscal;

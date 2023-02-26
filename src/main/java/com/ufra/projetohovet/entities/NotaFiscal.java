@@ -22,6 +22,6 @@ public class NotaFiscal {
     private Long id;
     @ManyToOne
     private Fornecedor fornecedor;
-    @OneToMany(mappedBy = "nota_fiscal_id")
+    @OneToMany(mappedBy = "notaFiscal")
     private List<ItemDaNota> itemsDaNota;
 }

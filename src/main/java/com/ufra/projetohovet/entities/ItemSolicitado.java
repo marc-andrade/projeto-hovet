@@ -20,6 +20,7 @@ public class ItemSolicitado {
     @Column(nullable = false)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "insumo")
     private Insumo insumo;
     private Integer quantidade;
     @ManyToOne

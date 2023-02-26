@@ -21,6 +21,6 @@ public class SolicitacaoDeCompra {
     @Column(nullable = false)
     private Long id;
     private String status;
-    @OneToMany(mappedBy = "solicitacao_de_compra_id")
+    @OneToMany(mappedBy = "solicitacaoDeCompra")
     private List<ItemSolicitado> itemsSolicitados;
 }

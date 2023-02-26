@@ -28,6 +28,7 @@ public class Insumo {
     private Categoria Categoria;
     @OneToMany(mappedBy = "insumo")
     private List<Estoque> estoques;
-
+    @OneToMany(mappedBy = "insumo")
+    private List<ItemSolicitado> itemsSolicitados;
 
 }
