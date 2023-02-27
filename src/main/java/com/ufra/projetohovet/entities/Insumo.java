@@ -24,11 +24,11 @@ public class Insumo {
     private TipoInsumo tipo;
     private String nome;
     private Integer unidade;
-    private String Categoria;
-
+    @ManyToOne
+    private Categoria Categoria;
     @OneToMany(mappedBy = "insumo")
     private List<Estoque> estoques;
     @OneToMany(mappedBy = "insumo")
-    private List<Dispensario> dispensarios;
+    private List<ItemSolicitado> itemsSolicitados;
 
 }

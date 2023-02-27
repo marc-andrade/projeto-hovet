@@ -6,36 +6,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_movimentacao")
-public class Movimentacao {
+@Table(name = "tb_item_solicitado")
+public class ItemSolicitado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
-
-    private String tipo;
     @ManyToOne
-    private Local origem;
-    @ManyToOne
-    private Local destino;
-    private LocalDate cadastro;
-    @ManyToOne
-    private User user;
-    @ManyToOne
+    @JoinColumn(name = "insumo")
     private Insumo insumo;
+    private Integer quantidade;
     @ManyToOne
-    private Permuta permuta;
-    @ManyToOne
-    private Doacao doacao;
-    @ManyToOne
-    private Compra compra;
+    @JoinColumn(name = "solicitacao_de_compra_id")
+    private SolicitacaoDeCompra solicitacaoDeCompra;
 
 }
