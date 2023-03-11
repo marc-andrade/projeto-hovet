@@ -41,6 +41,10 @@ public class User implements UserDetails {
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "setor_id")
+    private Setor setor;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

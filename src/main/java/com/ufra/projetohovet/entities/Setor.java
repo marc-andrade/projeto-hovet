@@ -20,4 +20,5 @@ public class Setor {
     private Long id;
     @Column(nullable = false)
     private String nome;
+
 }
