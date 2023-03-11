@@ -42,8 +42,8 @@ public class SetorService {
 
     @Transactional
     public Page<SetorDTO> findAll(Pageable pageable) {
-        Page<Setor> list = repository.findAll(pageable);
-        return list.map(x -> mapper.map(x, SetorDTO.class));
+        Page<Setor> page = repository.findAll(pageable);
+        return page.map(x -> mapper.map(x, SetorDTO.class));
     }
 
     @Transactional
