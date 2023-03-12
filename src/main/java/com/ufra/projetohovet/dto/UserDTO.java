@@ -25,6 +25,7 @@ public class UserDTO {
     @NotBlank(message = "Campo obrigatório")
     private String password;
     private Set<RoleDTO> roles = new HashSet<>();
+    private SetorDTO setor;
 
     public UserDTO(User user) {
         this.id = user.getId();
@@ -32,6 +33,7 @@ public class UserDTO {
         this.email = user.getEmail();
         this.password = user.getPassword();
         user.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
+        this.setor = new SetorDTO(user.getSetor());
     }
 
 }
