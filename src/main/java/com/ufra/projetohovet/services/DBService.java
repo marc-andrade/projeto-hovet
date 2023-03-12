@@ -26,7 +26,7 @@ public class DBService {
         Role role1 = new Role(null,"ROLE_ADMIN");
         Role role2 = new Role(null, "ROLE_USER");
 
-        Setor setor = new Setor(null, "TESTE");
+        Setor setor = new Setor(null, "TESTE", "TESTE");
 
         User user1 = new User(null,
                 "Marcos Andrade",

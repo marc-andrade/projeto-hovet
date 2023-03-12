@@ -113,7 +113,7 @@ public class UserService {
     private void checkExistsEmail(Long id, UserDTO dto) {
         Optional<User> obj = repository.findByEmail(dto.getEmail());
         if (obj.isPresent() && !Objects.equals(obj.get().getId(), id)) {
-            throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!");
+            throw new DatabaseException("E-mail já cadastrado no sistema!");
         }
     }
 

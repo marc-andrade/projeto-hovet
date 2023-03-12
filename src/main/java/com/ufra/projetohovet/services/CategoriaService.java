@@ -1,9 +1,9 @@
 package com.ufra.projetohovet.services;
 
 
-import com.ufra.projetohovet.dto.SetorDTO;
-import com.ufra.projetohovet.entities.Setor;
-import com.ufra.projetohovet.repositories.SetorRepository;
+import com.ufra.projetohovet.dto.CategoriaDTO;
+import com.ufra.projetohovet.entities.Categoria;
+import com.ufra.projetohovet.repositories.CategoriaRepository;
 import com.ufra.projetohovet.services.exceptions.DatabaseException;
 import com.ufra.projetohovet.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -19,40 +19,40 @@ import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class SetorService {
+public class CategoriaService {
 
-    private final SetorRepository repository;
+    private final CategoriaRepository repository;
     private final ModelMapper mapper;
 
     @Transactional
-    public SetorDTO findById(Long id) {
+    public CategoriaDTO findById(Long id) {
 
-        Setor entity = repository.findById(id)
+        Categoria entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Entity not Found"));
-        return mapper.map(entity, SetorDTO.class);
+        return mapper.map(entity, CategoriaDTO.class);
     }
 
     @Transactional
-    public SetorDTO insert(SetorDTO entity) {
+    public CategoriaDTO insert(CategoriaDTO entity) {
 
         return mapper.map(
-                repository.save(mapper.map(entity, Setor.class))
-                , SetorDTO.class);
+                repository.save(mapper.map(entity, Categoria.class))
+                , CategoriaDTO.class);
     }
 
     @Transactional
-    public Page<SetorDTO> findAll(Pageable pageable) {
-        Page<Setor> page = repository.findAll(pageable);
-        return page.map(x -> mapper.map(x, SetorDTO.class));
+    public Page<CategoriaDTO> findAll(Pageable pageable) {
+        Page<Categoria> page = repository.findAll(pageable);
+        return page.map(x -> mapper.map(x, CategoriaDTO.class));
     }
 
     @Transactional
-    public SetorDTO update(Long id, SetorDTO dto) {
+    public CategoriaDTO update(Long id, CategoriaDTO dto) {
         try {
-            Setor oldEntity = repository.getReferenceById(id);
+            Categoria oldEntity = repository.getReferenceById(id);
             copyDtoToEntity(dto, oldEntity);
 
-            return mapper.map(repository.save(oldEntity), SetorDTO.class);
+            return mapper.map(repository.save(oldEntity), CategoriaDTO.class);
 
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Id not found " + id);
@@ -71,9 +71,8 @@ public class SetorService {
         }
     }
 
-    private void copyDtoToEntity(SetorDTO dto, Setor oldEntity) {
+    private void copyDtoToEntity(CategoriaDTO dto, Categoria oldEntity) {
         oldEntity.setNome(dto.getNome());
-        oldEntity.setDescricao(dto.getDescricao());
     }
 
 }

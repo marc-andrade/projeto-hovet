@@ -12,18 +12,15 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SetorDTO {
+public class CategoriaDTO {
 
     private Long id;
     @NotBlank(message = "campo obrigatório")
     private String nome;
-    @NotBlank(message = "campo obrigatório")
-    private String descricao;
 
-    public SetorDTO(Setor setor){
+    public CategoriaDTO(Setor setor){
         this.id =  setor.getId();
         this.nome = setor.getNome();
-        this.descricao = setor.getDescricao();
     }
 
 }

@@ -20,7 +20,6 @@ public class Movimentacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
-
     private String tipo;
     @ManyToOne
     private Local origem;
