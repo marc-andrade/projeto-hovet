@@ -19,7 +19,7 @@ public class Setor {
     @Column(nullable = false)
     private Long id;
     @Column(nullable = false)
-    private String nome;
+    private String sigla;
     @Column(nullable = false)
     private String descricao;
 

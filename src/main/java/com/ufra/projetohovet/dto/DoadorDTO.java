@@ -1,6 +1,5 @@
 package com.ufra.projetohovet.dto;
 
-import com.ufra.projetohovet.entities.Setor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,15 +11,13 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoriaDTO {
+public class DoadorDTO {
 
     private Long id;
     @NotBlank(message = "campo obrigatório")
     private String nome;
+    @NotBlank(message = "campo obrigatório")
+    private String descricao;
 
-    public CategoriaDTO(Setor setor){
-        this.id =  setor.getId();
-        this.nome = setor.getSigla();
-    }
 
 }

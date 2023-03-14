@@ -22,7 +22,7 @@ public class SetorDTO {
 
     public SetorDTO(Setor setor){
         this.id =  setor.getId();
-        this.nome = setor.getNome();
+        this.nome = setor.getSigla();
         this.descricao = setor.getDescricao();
     }
 

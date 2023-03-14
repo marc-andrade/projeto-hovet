@@ -1,8 +1,8 @@
 package com.ufra.projetohovet.controller;
 
 
-import com.ufra.projetohovet.dto.CategoriaDTO;
-import com.ufra.projetohovet.services.CategoriaService;
+import com.ufra.projetohovet.dto.DoadorDTO;
+import com.ufra.projetohovet.services.DoadorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,32 +14,32 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/doadores")
 @RequiredArgsConstructor
-public class CategoriaResource {
+public class DoadorResource {
 
-    private final CategoriaService service;
+    private final DoadorService service;
 
     @GetMapping
-    public ResponseEntity<Page<CategoriaDTO>> findAll(Pageable pageable){
+    public ResponseEntity<Page<DoadorDTO>> findAll(Pageable pageable){
         return ResponseEntity.ok().body(service.findAll(pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoriaDTO> findById(@PathVariable Long id){
+    public ResponseEntity<DoadorDTO> findById(@PathVariable Long id){
         return ResponseEntity.ok().body(service.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<CategoriaDTO> insert(@Valid @RequestBody CategoriaDTO dto){
-        CategoriaDTO newDto = service.insert(dto);
+    public ResponseEntity<DoadorDTO> insert(@Valid @RequestBody DoadorDTO dto){
+        DoadorDTO newDto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
                 .buildAndExpand(newDto.getId()).toUri();
         return ResponseEntity.created(uri).body(newDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CategoriaDTO> update(@PathVariable Long id, @Valid @RequestBody CategoriaDTO dto){
+    public ResponseEntity<DoadorDTO> update(@PathVariable Long id, @Valid @RequestBody DoadorDTO dto){
         return ResponseEntity.ok().body(service.update(id,dto));
     }
 
@@ -48,5 +48,4 @@ public class CategoriaResource {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }
