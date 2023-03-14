@@ -21,6 +21,7 @@ public class Local {
     @Column(nullable = false)
     private Long id;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private TipoLocal tipoLocal;
     @Column(nullable = false)
     private String nome;
