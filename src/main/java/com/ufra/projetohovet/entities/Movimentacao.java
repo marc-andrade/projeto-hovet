@@ -1,5 +1,6 @@
 package com.ufra.projetohovet.entities;
 
+import com.ufra.projetohovet.enums.TipoMovimentacao;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +21,8 @@ public class Movimentacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
-
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    private TipoMovimentacao tipo;
     @ManyToOne
     private Local origem;
     @ManyToOne

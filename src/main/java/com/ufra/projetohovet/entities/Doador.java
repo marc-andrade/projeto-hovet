@@ -19,4 +19,6 @@ public class Doador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
+    private String nome;
+    private String descricao;
 }

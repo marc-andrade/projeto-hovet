@@ -1,6 +1,7 @@
 package com.ufra.projetohovet.dto;
 
 import com.ufra.projetohovet.entities.User;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,12 +9,12 @@ import lombok.Setter;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@EqualsAndHashCode
 public class UserDTO {
 
     private Long id;
@@ -24,6 +25,7 @@ public class UserDTO {
     @NotBlank(message = "Campo obrigatório")
     private String password;
     private Set<RoleDTO> roles = new HashSet<>();
+    private SetorDTO setor;
 
     public UserDTO(User user) {
         this.id = user.getId();
@@ -31,18 +33,7 @@ public class UserDTO {
         this.email = user.getEmail();
         this.password = user.getPassword();
         user.getRoles().forEach(role -> this.roles.add(new RoleDTO(role)));
+        this.setor = new SetorDTO(user.getSetor());
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserDTO userDTO = (UserDTO) o;
-        return Objects.equals(id, userDTO.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

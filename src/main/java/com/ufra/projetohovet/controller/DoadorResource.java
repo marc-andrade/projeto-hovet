@@ -1,8 +1,8 @@
 package com.ufra.projetohovet.controller;
 
 
-import com.ufra.projetohovet.dto.UserDTO;
-import com.ufra.projetohovet.services.UserService;
+import com.ufra.projetohovet.dto.DoadorDTO;
+import com.ufra.projetohovet.services.DoadorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,32 +14,32 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/doadores")
 @RequiredArgsConstructor
-public class UserResource {
+public class DoadorResource {
 
-    private final UserService service;
+    private final DoadorService service;
 
     @GetMapping
-    public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable){
+    public ResponseEntity<Page<DoadorDTO>> findAll(Pageable pageable){
         return ResponseEntity.ok().body(service.findAll(pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> findById(@PathVariable Long id){
+    public ResponseEntity<DoadorDTO> findById(@PathVariable Long id){
         return ResponseEntity.ok().body(service.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserDTO dto){
-        UserDTO newDto = service.insert(dto);
+    public ResponseEntity<DoadorDTO> insert(@Valid @RequestBody DoadorDTO dto){
+        DoadorDTO newDto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
                 .buildAndExpand(newDto.getId()).toUri();
         return ResponseEntity.created(uri).body(newDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserDTO dto){
+    public ResponseEntity<DoadorDTO> update(@PathVariable Long id, @Valid @RequestBody DoadorDTO dto){
         return ResponseEntity.ok().body(service.update(id,dto));
     }
 
@@ -48,5 +48,4 @@ public class UserResource {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }

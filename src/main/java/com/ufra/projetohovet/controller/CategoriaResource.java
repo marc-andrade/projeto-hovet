@@ -1,8 +1,8 @@
 package com.ufra.projetohovet.controller;
 
 
-import com.ufra.projetohovet.dto.UserDTO;
-import com.ufra.projetohovet.services.UserService;
+import com.ufra.projetohovet.dto.CategoriaDTO;
+import com.ufra.projetohovet.services.CategoriaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,32 +14,32 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/categorias")
 @RequiredArgsConstructor
-public class UserResource {
+public class CategoriaResource {
 
-    private final UserService service;
+    private final CategoriaService service;
 
     @GetMapping
-    public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable){
+    public ResponseEntity<Page<CategoriaDTO>> findAll(Pageable pageable){
         return ResponseEntity.ok().body(service.findAll(pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> findById(@PathVariable Long id){
+    public ResponseEntity<CategoriaDTO> findById(@PathVariable Long id){
         return ResponseEntity.ok().body(service.findById(id));
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserDTO dto){
-        UserDTO newDto = service.insert(dto);
+    public ResponseEntity<CategoriaDTO> insert(@Valid @RequestBody CategoriaDTO dto){
+        CategoriaDTO newDto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
                 .buildAndExpand(newDto.getId()).toUri();
         return ResponseEntity.created(uri).body(newDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserDTO dto){
+    public ResponseEntity<CategoriaDTO> update(@PathVariable Long id, @Valid @RequestBody CategoriaDTO dto){
         return ResponseEntity.ok().body(service.update(id,dto));
     }
 

@@ -1,7 +1,9 @@
 package com.ufra.projetohovet.enums;
 
-public enum EstoqueLocal {
+public enum TipoLocal {
 
     SALA,
+    DISPENSARIO,
     DEPOSITO;
+
 }
