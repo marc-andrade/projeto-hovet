@@ -10,12 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -41,9 +40,9 @@ public class CategoriaService {
     }
 
     @Transactional
-    public Page<CategoriaDTO> findAll(Pageable pageable) {
-        Page<Categoria> page = repository.findAll(pageable);
-        return page.map(x -> mapper.map(x, CategoriaDTO.class));
+    public List<CategoriaDTO> findAll() {
+        List<Categoria> list = repository.findAll();
+        return list.stream().map(x -> mapper.map(x, CategoriaDTO.class)).toList();
     }
 
     @Transactional

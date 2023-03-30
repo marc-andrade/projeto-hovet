@@ -13,12 +13,11 @@ import com.ufra.projetohovet.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -52,10 +51,10 @@ public class UserService {
     }
 
     @Transactional
-    public Page<UserDTO> findAll(Pageable pageable) {
-        Page<User> list = repository.findAll(pageable);
+    public List<UserDTO> findAll() {
 
-        return list.map(UserDTO::new);
+        List<User> list = repository.findAll();
+        return list.stream().map(UserDTO::new).toList();
     }
 
     @Transactional

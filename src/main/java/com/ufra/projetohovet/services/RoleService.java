@@ -6,11 +6,10 @@ import com.ufra.projetohovet.entities.Setor;
 import com.ufra.projetohovet.repositories.SetorRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +19,9 @@ public class RoleService {
     private final ModelMapper mapper;
 
     @Transactional
-    public Page<RoleDTO> findAll(Pageable pageable) {
-        Page<Setor> page = repository.findAll(pageable);
-        return page.map(x -> mapper.map(x, RoleDTO.class));
+    public List<RoleDTO> findAll() {
+        List<Setor> list = repository.findAll();
+        return list.stream().map(x -> mapper.map(x, RoleDTO.class)).toList();
     }
 
 }

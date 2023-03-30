@@ -10,12 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -41,9 +40,9 @@ public class SetorService {
     }
 
     @Transactional
-    public Page<SetorDTO> findAll(Pageable pageable) {
-        Page<Setor> page = repository.findAll(pageable);
-        return page.map(x -> mapper.map(x, SetorDTO.class));
+    public List<SetorDTO> findAll() {
+        List<Setor> list = repository.findAll();
+        return list.stream().map(x -> mapper.map(x, SetorDTO.class)).toList();
     }
 
     @Transactional

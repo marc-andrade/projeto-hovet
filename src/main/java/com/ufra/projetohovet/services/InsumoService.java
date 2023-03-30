@@ -11,12 +11,11 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -43,9 +42,9 @@ public class InsumoService {
     }
 
     @Transactional
-    public Page<InsumoDTO> findAll(Pageable pageable) {
-        Page<Insumo> page = repository.findAll(pageable);
-        return page.map(x -> mapper.map(x, InsumoDTO.class));
+    public List<InsumoDTO> findAll() {
+        List<Insumo> list = repository.findAll();
+        return list.stream().map(x -> mapper.map(x, InsumoDTO.class)).toList();
     }
 
     @Transactional

@@ -4,14 +4,13 @@ package com.ufra.projetohovet.controller;
 import com.ufra.projetohovet.dto.UserDTO;
 import com.ufra.projetohovet.services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -21,8 +20,8 @@ public class UserResource {
     private final UserService service;
 
     @GetMapping
-    public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable){
-        return ResponseEntity.ok().body(service.findAll(pageable));
+    public ResponseEntity<List<UserDTO>> findAll(){
+        return ResponseEntity.ok().body(service.findAll());
     }
 
     @GetMapping("/{id}")
