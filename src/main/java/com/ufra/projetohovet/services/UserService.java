@@ -16,6 +16,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
@@ -60,18 +61,22 @@ public class UserService {
     @Transactional
     public UserDTO update(Long id, UserDTO dto) {
 
-        User oldUser = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("ID não existe no banco de dados"));
+        try {
+            User oldUser = repository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("ID não existe no banco de dados"));
 
-        if (!dto.getPassword().equals(oldUser.getPassword())) {
-            dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+            if (!dto.getPassword().equals(oldUser.getPassword())) {
+                dto.setPassword(passwordEncoder.encode(dto.getPassword()));
+            }
+
+            checkExistsEmail(id, dto);
+            copyDtoToEntity(dto, oldUser);
+
+            return new UserDTO(repository.save(oldUser));
+
+        }catch (EntityNotFoundException e){
+            throw new DatabaseException("ID not found " + id);
         }
-
-        checkExistsEmail(id, dto);
-        copyDtoToEntity(dto, oldUser);
-
-        return new UserDTO(repository.save(oldUser));
-
     }
 
     @Transactional
